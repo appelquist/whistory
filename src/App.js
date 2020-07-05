@@ -1,26 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
+import { getStations } from './APICalls';
+import Station from "./Station"
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      stations: []
+    }
+  }
+  async componentDidMount() {
+    this.setState({
+      stations: await getStations()
+    });
+    console.log(this.state.stations.map(s => ({ name: s.name, key: s.key, searchName: "" })))
+  }
+  render() {
+    const stations = this.state.stations.map(station => (
+      <Station name={station.name} id={station.key} />
+    ));
+    return (
+      <div>
+        [
+         {stations}
+        ]
+      </div>
+    )
+  }
 }
 
 export default App;
