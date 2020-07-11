@@ -380,5 +380,6 @@ const STATOINS_SEARCH_DATA = [
     {name: "Östergarnsholm A", key: 78280, searchName: "Östergarnsholm"},
     
     {name: "Överkalix-Svartbyn A", key: 172770, searchName: "Överkalix-Svartbyn"},
-    
     ]
+
+export default STATOINS_SEARCH_DATA;

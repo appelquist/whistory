@@ -2,29 +2,27 @@ import React, { Component } from 'react';
 import { getStations } from './APICalls';
 import Station from "./Station"
 import './App.css';
+import FindStationForm from './FindStationForm';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      stations: []
+      station: {}
     }
+    this.getData = this.getData.bind(this);
   }
+
+  getData(station) {
+    console.log(station);
+  }
+
   async componentDidMount() {
-    this.setState({
-      stations: await getStations()
-    });
-    console.log(this.state.stations.map(s => ({ name: s.name, key: s.key, searchName: "" })))
   }
   render() {
-    const stations = this.state.stations.map(station => (
-      <Station name={station.name} id={station.key} />
-    ));
     return (
       <div>
-        [
-         {stations}
-        ]
+        <FindStationForm getData={this.getData}/>
       </div>
     )
   }

@@ -9,4 +9,8 @@ async function getStations() {
     return stations;
 }
 
+async function getTemperatureData(station) {
+    
+}
+
 export { getStations };
