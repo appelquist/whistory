@@ -215,61 +215,61 @@ const STATOINS_SEARCH_DATA = [
     
     {name: "Mora A", key: 104580, searchName: "Mora"},
     
-    {name: "Målilla A", key: 75250, searchName: "Målilla A"},
+    {name: "Målilla A", key: 75250, searchName: "Målilla"},
     
-    {name: "Måseskär A", key: 81050, searchName: "Måseskär A"},
+    {name: "Måseskär A", key: 81050, searchName: "Måseskär"},
     
-    {name: "Naimakka A", key: 191910, searchName: "Naimakka A"},
+    {name: "Naimakka A", key: 191910, searchName: "Naimakka"},
     
-    {name: "Nattavaara A", key: 170930, searchName: "Nattavaara A"},
+    {name: "Nattavaara A", key: 170930, searchName: "Nattavaara"},
     
-    {name: "Naven A", key: 83420, searchName: "Naven A"},
+    {name: "Naven A", key: 83420, searchName: "Naven"},
     
-    {name: "Nidingen A", key: 71190, searchName: "Nidingen A"},
+    {name: "Nidingen A", key: 71190, searchName: "Nidingen"},
     
-    {name: "Nikkaluokta A", key: 179960, searchName: "Nikkaluokta A"},
+    {name: "Nikkaluokta A", key: 179960, searchName: "Nikkaluokta"},
     
-    {name: "Nordkoster A", key: 81540, searchName: "Nordkoster A"},
+    {name: "Nordkoster A", key: 81540, searchName: "Nordkoster"},
     
-    {name: "Norrköping-SMHI", key: 86340, searchName: "Norrköping-SMHI"},
+    {name: "Norrköping-SMHI", key: 86340, searchName: "Norrköping"},
     
-    {name: "Norsjö A", key: 149560, searchName: "Norsjö A"},
+    {name: "Norsjö A", key: 149560, searchName: "Norsjö"},
     
-    {name: "Paharova A", key: 172940, searchName: "Paharova A"},
+    {name: "Paharova A", key: 172940, searchName: "Paharova"},
     
-    {name: "Pajala A", key: 183750, searchName: "Pajala A"},
+    {name: "Pajala A", key: 183750, searchName: "Pajala"},
     
-    {name: "Parkalompolo A", key: 182910, searchName: "Parkalompolo A"},
+    {name: "Parkalompolo A", key: 182910, searchName: "Parkalompolo"},
     
-    {name: "Petisträsk A", key: 149340, searchName: "Petisträsk A"},
+    {name: "Petisträsk A", key: 149340, searchName: "Petisträsk"},
     
-    {name: "Pite-Rönnskär A", key: 161710, searchName: "Pite-Rönnskär A"},
+    {name: "Pite-Rönnskär A", key: 161710, searchName: "Pite-Rönnskär"},
     
-    {name: "Pålgrunden A", key: 83450, searchName: "Pålgrunden A"},
+    {name: "Pålgrunden A", key: 83450, searchName: "Pålgrunden"},
     
-    {name: "Rensjön A", key: 189720, searchName: "Rensjön A"},
+    {name: "Rensjön A", key: 189720, searchName: "Rensjön"},
     
-    {name: "Ritsem A", key: 177930, searchName: "Ritsem A"},
+    {name: "Ritsem A", key: 177930, searchName: "Ritsem"},
     
     {name: "Ronneby-Bredåkra", key: 65160, searchName: "Ronneby-Bredåkra"},
     
-    {name: "Rångedala A", key: 73480, searchName: "Rångedala A"},
+    {name: "Rångedala A", key: 73480, searchName: "Rångedala"},
     
-    {name: "Rödkallen A", key: 162790, searchName: "Rödkallen A"},
+    {name: "Rödkallen A", key: 162790, searchName: "Rödkallen"},
     
-    {name: "Saittarova A", key: 182810, searchName: "Saittarova A"},
+    {name: "Saittarova A", key: 182810, searchName: "Saittarova"},
     
-    {name: "Sala A", key: 96560, searchName: "Sala A"},
+    {name: "Sala A", key: 96560, searchName: "Sala"},
     
-    {name: "Skagsudde A", key: 139120, searchName: "Skagsudde A"},
+    {name: "Skagsudde A", key: 139120, searchName: "Skagsudde"},
     
-    {name: "Skarpö A", key: 98160, searchName: "Skarpö A"},
+    {name: "Skarpö A", key: 98160, searchName: "Skarpö"},
     
     {name: "Skellefteå Flygplats", key: 151380, searchName: "Skellefteå Flygplats"},
     
-    {name: "Skillinge A", key: 54290, searchName: "Skillinge A"},
+    {name: "Skillinge A", key: 54290, searchName: "Skillinge"},
     
-    {name: "Stekenjokk A", key: 154730, searchName: "Stekenjokk A"},
+    {name: "Stekenjokk A", key: 154730, searchName: "Stekenjokk"},
     
     {name: "Stockholm", key: 98210, searchName: "Stockholm"},
     
@@ -279,89 +279,89 @@ const STATOINS_SEARCH_DATA = [
     
     {name: "Stockholm-Bromma", key: 97200, searchName: "Stockholm-Bromma"},
     
-    {name: "Stora Sjöfallet A", key: 178860, searchName: "Stora Sjöfallet A"},
+    {name: "Stora Sjöfallet A", key: 178860, searchName: "Stora Sjöfallet"},
     
-    {name: "Stora Spånsberget A", key: 105220, searchName: "Stora Spånsberget A"},
+    {name: "Stora Spånsberget A", key: 105220, searchName: "Stora Spånsberget"},
     
-    {name: "Storlien-Storvallen A", key: 132170, searchName: "Storlien-Storvallen A"},
+    {name: "Storlien-Storvallen A", key: 132170, searchName: "Storlien-Storvallen"},
     
-    {name: "Storön A", key: 163900, searchName: "Storön A"},
+    {name: "Storön A", key: 163900, searchName: "Storön"},
     
     {name: "Sturup", key: 53300, searchName: "Sturup"},
     
     {name: "Sundsvalls Flygplats", key: 127310, searchName: "Sundsvalls Flygplats"},
     
-    {name: "Sunne A", key: 93520, searchName: "Sunne A"},
+    {name: "Sunne A", key: 93520, searchName: "Sunne"},
     
-    {name: "Svanberga A", key: 98490, searchName: "Svanberga A"},
+    {name: "Svanberga A", key: 98490, searchName: "Svanberga"},
     
-    {name: "Sveg A", key: 124030, searchName: "Sveg A"},
+    {name: "Sveg A", key: 124030, searchName: "Sveg"},
     
     {name: "Svenska Högarna", key: 99270, searchName: "Svenska Högarna"},
     
     {name: "Svenska Högarna A", key: 99280, searchName: "Svenska Högarna A"},
     
-    {name: "Sylarna A", key: 132030, searchName: "Sylarna A"},
+    {name: "Sylarna A", key: 132030, searchName: "Sylarna"},
     
     {name: "Såtenäs", key: 82260, searchName: "Såtenäs"},
     
-    {name: "Söderarm A", key: 99450, searchName: "Söderarm A"},
+    {name: "Söderarm A", key: 99450, searchName: "Söderarm"},
     
-    {name: "Tarfala A", key: 178970, searchName: "Tarfala A"},
+    {name: "Tarfala A", key: 178970, searchName: "Tarfala"},
     
-    {name: "Tjåkaape Mo", key: 169790, searchName: "Tjåkaape Mo"},
+    {name: "Tjåkaape Mo", key: 169790, searchName: "Tjåkaape"},
     
-    {name: "Tomtabacken A", key: 74300, searchName: "Tomtabacken A"},
+    {name: "Tomtabacken A", key: 74300, searchName: "Tomtabacken"},
     
-    {name: "Torpshammar A", key: 126290, searchName: "Torpshammar A"},
+    {name: "Torpshammar A", key: 126290, searchName: "Torpshammar"},
     
-    {name: "Torup A", key: 63590, searchName: "Torup A"},
+    {name: "Torup A", key: 63590, searchName: "Torup"},
     
-    {name: "Tullinge A", key: 97100, searchName: "Tullinge A"},
+    {name: "Tullinge A", key: 97100, searchName: "Tullinge"},
     
-    {name: "Tännäs A", key: 122260, searchName: "Tännäs A"},
+    {name: "Tännäs A", key: 122260, searchName: "Tännäs"},
     
-    {name: "Ullared A", key: 72090, searchName: "Ullared A"},
+    {name: "Ullared A", key: 72090, searchName: "Ullared"},
     
     {name: "Umeå Flygplats", key: 140480, searchName: "Umeå Flygplats"},
     
-    {name: "Uppsala Aut", key: 97510, searchName: "Uppsala Aut"},
+    {name: "Uppsala Aut", key: 97510, searchName: "Uppsala"},
     
     {name: "Uppsala Flygplats", key: 97530, searchName: "Uppsala Flygplats"},
     
-    {name: "Utklippan A", key: 55570, searchName: "Utklippan A"},
+    {name: "Utklippan A", key: 55570, searchName: "Utklippan"},
     
     {name: "Vidsel", key: 160960, searchName: "Vidsel"},
     
-    {name: "Vidsel Mo", key: 160970, searchName: "Vidsel Mo"},
+    {name: "Vidsel Mo", key: 160970, searchName: "Vidsel"},
     
     {name: "Vilhelmina A", key: 146350, searchName: "Vilhelmina A"},
     
     {name: "Vindeln-Sunnansjönäs", key: 149120, searchName: "Vindeln-Sunnansjönäs"},
     
-    {name: "Vinga A", key: 71380, searchName: "Vinga A"},
+    {name: "Vinga A", key: 71380, searchName: "Vinga"},
     
     {name: "Visby Flygplats", key: 78400, searchName: "Visby Flygplats"},
     
-    {name: "Visingsö A", key: 84050, searchName: "Visingsö A"},
+    {name: "Visingsö A", key: 84050, searchName: "Visingsö"},
     
-    {name: "Väderöarna A", key: 81350, searchName: "Väderöarna A"},
+    {name: "Väderöarna A", key: 81350, searchName: "Väderöarna"},
     
-    {name: "Västmarkum A", key: 138070, searchName: "Västmarkum A"},
+    {name: "Västmarkum A", key: 138070, searchName: "Västmarkum"},
     
-    {name: "Växjö A", key: 64510, searchName: "Växjö A"},
+    {name: "Växjö A", key: 64510, searchName: "Växjö"},
     
-    {name: "Ylinenjärvi A", key: 173900, searchName: "Ylinenjärvi A"},
+    {name: "Ylinenjärvi A", key: 173900, searchName: "Ylinenjärvi"},
     
     {name: "Zinkgruvan", key: 85490, searchName: "Zinkgruvan"},
     
-    {name: "Älvdalen A", key: 114140, searchName: "Älvdalen A"},
+    {name: "Älvdalen A", key: 114140, searchName: "Älvdalen"},
     
-    {name: "Älvsbyn A", key: 161910, searchName: "Älvsbyn A"},
+    {name: "Älvsbyn A", key: 161910, searchName: "Älvsbyn"},
     
-    {name: "Åmot A", key: 106570, searchName: "Åmot A"},
+    {name: "Åmot A", key: 106570, searchName: "Åmot"},
     
-    {name: "Åsele A", key: 147090, searchName: "Åsele A"},
+    {name: "Åsele A", key: 147090, searchName: "Åsele"},
     
     {name: "Åtorp", key: 94050, searchName: "Åtorp"},
     
@@ -369,16 +369,16 @@ const STATOINS_SEARCH_DATA = [
     
     {name: "Ölands norra udde A", key: 77210, searchName: "Ölands norra udde A"},
     
-    {name: "Ölands södra udde A", key: 66110, searchName: "Ölands södra udde A"},
+    {name: "Ölands södra udde A", key: 66110, searchName: "Ölands södra udde"},
     
     {name: "Örebro Flygplats", key: 95130, searchName: "Örebro Flygplats"},
     
     {name: "Örnsköldsviks Flygplats", key: 138240, searchName: "Örnsköldsviks Flygplats"},
     
-    {name: "Örskär A", key: 108320, searchName: "Örskär A"},
+    {name: "Örskär A", key: 108320, searchName: "Örskär"},
     
-    {name: "Östergarnsholm A", key: 78280, searchName: "Östergarnsholm A"},
+    {name: "Östergarnsholm A", key: 78280, searchName: "Östergarnsholm"},
     
-    {name: "Överkalix-Svartbyn A", key: 172770, searchName: "Överkalix-Svartbyn A"},
+    {name: "Överkalix-Svartbyn A", key: 172770, searchName: "Överkalix-Svartbyn"},
     
     ]
