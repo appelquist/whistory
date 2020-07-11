@@ -1,4 +1,4 @@
-const searchStations = [
+const STATOINS_SEARCH_DATA = [
     {name: "Abisko Aut", key: 188790, searchName: "Abisko"},
     
     {name: "Adelsö A", key: 97280, searchName: "Adelsö"},
