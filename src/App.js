@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { getStations } from './APICalls';
-import Station from "./Station"
+import { getStations, getTemperatureData } from './APICalls';
 import './App.css';
 import FindStationForm from './FindStationForm';
 
@@ -14,7 +13,7 @@ class App extends Component {
   }
 
   getData(station) {
-    console.log(station);
+    getTemperatureData(station);
   }
 
   async componentDidMount() {
