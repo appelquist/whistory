@@ -10,7 +10,7 @@ async function getStations() {
     return stations;
 }
 
-async function getTemperatureData(station) {
+async function getTemperatureData(station, days) {
     console.log(station.key);
     const url = `https://opendata-download-metobs.smhi.se/api/version/latest/parameter/1/station/${station.key}/period/latest-months/data.json`
     const response = await fetch(url);
@@ -21,7 +21,7 @@ async function getTemperatureData(station) {
         const date = new Date(value.date);
         return {time: date, value: value.value}
     })
-    console.log(getLatestTimesAndValues(7, timesAndValues));
+    console.log(getLatestTimesAndValues(days, timesAndValues));
 }
 
 function getLatestTimesAndValues(days, timesAndValues) {
