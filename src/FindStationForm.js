@@ -15,7 +15,7 @@ class FindStationForm extends Component {
     handleSubmit(e) {
         e.preventDefault();
         const station = STATIONS_SEARCH_DATA.find(station => station.searchName.toLowerCase() === this.state.stationName.toLowerCase());
-        this.props.getData(station);     
+        this.props.getData(station);
     }
 
     handleChange(e) {

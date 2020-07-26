@@ -8,7 +8,6 @@ async function getStations() {
 }
 
 async function getTemperatureData(station, days) {
-  console.log(station.key);
   const url = `https://opendata-download-metobs.smhi.se/api/version/latest/parameter/1/station/${station.key}/period/latest-months/data.json`;
   const response = await fetch(url);
   const data = await response.json();
@@ -21,7 +20,7 @@ async function getTemperatureData(station, days) {
   const latestTimesAndValues = getLatestTimesAndValues(days, timesAndValues);
   const valuesByDay = groupBy(latestTimesAndValues, "day");
   const averagesByDay = getAverageTemperature(Object.values(valuesByDay));
-  console.log(averagesByDay);
+  return averagesByDay;
 }
 
 function getLatestTimesAndValues(days, timesAndValues) {
@@ -57,7 +56,8 @@ function getAverageTemperature(days) {
     }, 0);;
     let average = ((sum / day.length).toFixed(1));
     let singleDay = day[0].time;
-    return ({  day: singleDay , average: average });
+    singleDay = `${singleDay.getDate()}/${singleDay.getMonth() + 1}`
+    return ({  x: singleDay , y: Number(average) });
   });
 }
 
