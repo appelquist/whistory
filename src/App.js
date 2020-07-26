@@ -13,7 +13,7 @@ class App extends Component {
   }
 
   getData(station) {
-    getTemperatureData(station);
+    getTemperatureData(station, 7);
   }
 
   async componentDidMount() {
