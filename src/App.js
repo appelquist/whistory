@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import { getTemperatureData } from "./services/data";
+import { getTemperatureData, getPressureData } from "./services/data";
 import "./App.css";
 import StationForm from "./components/StationForm";
-import { ResponsiveLine } from "@nivo/line";
+import TemperaturePlot from "./components/TemperaturePlot";
+import PressurePlot from "./components/PressurePlot";
 
 class App extends Component {
   constructor(props) {
@@ -15,64 +16,24 @@ class App extends Component {
   }
 
   async getData(station) {
-    const data = await getTemperatureData(station, 7);
+    const temperatureData = await getTemperatureData(station, 7);
+    const pressureData = await getPressureData(station, 7);
     this.setState({
-      data: data,
+      data: { temperature: temperatureData, pressure: pressureData },
     });
   }
 
   async componentDidMount() {}
   render() {
-    const data = this.state.data;
-    console.log(data);
+    const { temperature, pressure} = this.state.data;
     return (
-      <div style={{height: "50vh", width: "50%"}}>
+      <div style={{ height: "100vh", width: "100%" }}>
         <StationForm getData={this.getData} />
-        {data &&
-        <ResponsiveLine
-          data={data}
-          margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
-          xScale={{ type: "point" }}
-          yScale={{
-            type: "linear",
-            min: "auto",
-            max: "auto",
-            stacked: true,
-            reverse: false,
-          }}
-          axisTop={null}
-          axisRight={null}
-          axisBottom={{
-            orient: "bottom",
-            tickSize: 5,
-            tickPadding: 5,
-            tickRotation: 0,
-          }}
-          axisLeft={{
-            orient: "left",
-            tickSize: 5,
-            tickPadding: 5,
-            tickRotation: 0,
-            legend: "temperature",
-            legendOffset: -40,
-            legendPosition: "middle",
-          }}
-          colors={{ scheme: "nivo" }}
-          pointSize={10}
-          pointColor={{ theme: "background" }}
-          pointBorderWidth={2}
-          pointBorderColor={{ from: "serieColor" }}
-          pointLabel="y"
-          pointLabelYOffset={-12}
-          useMesh={true}
-          enableCrosshair={false}
-          enableSlices="x"
-        />
-        }
+        <TemperaturePlot data={temperature} />
+        <PressurePlot data={pressure}/>
       </div>
     );
   }
 }
 
 export default App;
-
