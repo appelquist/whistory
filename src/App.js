@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { getStations, getTemperatureData } from "./APICalls";
+import { getTemperatureData } from "./services/data";
 import "./App.css";
-import FindStationForm from "./FindStationForm";
+import StationForm from "./components/StationForm";
 import { ResponsiveLine } from "@nivo/line";
 
 class App extends Component {
@@ -27,7 +27,7 @@ class App extends Component {
     console.log(data);
     return (
       <div style={{height: "50vh", width: "50%"}}>
-        <FindStationForm getData={this.getData} />
+        <StationForm getData={this.getData} />
         {data &&
         <ResponsiveLine
           data={data}

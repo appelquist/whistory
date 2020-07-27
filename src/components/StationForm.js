@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import STATIONS_SEARCH_DATA from './searchData';
-import { getStations } from './APICalls';
+import STATIONS_SEARCH_DATA from '../constants/searchData';
 
-class FindStationForm extends Component {
+class StationForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -44,4 +43,4 @@ class FindStationForm extends Component {
     }
 }
 
-export default FindStationForm;
+export default StationForm;
