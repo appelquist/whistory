@@ -20,7 +20,7 @@ async function getTemperatureData(station, days) {
   const latestTimesAndValues = getLatestTimesAndValues(days, timesAndValues);
   const valuesByDay = groupBy(latestTimesAndValues, "day");
   const averagesByDay = getAverageTemperature(Object.values(valuesByDay));
-  return averagesByDay;
+  return [{id: "temperature", data: averagesByDay}];
 }
 
 function getLatestTimesAndValues(days, timesAndValues) {
