@@ -18,12 +18,29 @@ async function getTemperatureData(station, days) {
 
 async function getPressureData(station, days) {
   const url = `https://opendata-download-metobs.smhi.se/api/version/latest/parameter/9/station/${station.key}/period/latest-months/data.json`;
-  console.log(url);
   const response = await fetch(url);
   const data = await response.json();
 
   const formatedData = formatData(data, days);
   return [{ id: "pressure", data: formatedData }];
+}
+
+async function getWindVelocityData(station, days) {
+  const url = `https://opendata-download-metobs.smhi.se/api/version/latest/parameter/4/station/${station.key}/period/latest-months/data.json`;
+  const response = await fetch(url);
+  const data = await response.json();
+
+  const formatedData = formatData(data, days);
+  return [{id: "windVelocity", data: formatedData}];
+}
+
+async function getWindDirectionData(station, days) {
+  const url = `https://opendata-download-metobs.smhi.se/api/version/latest/parameter/3/station/${station.key}/period/latest-months/data.json`;
+  const response = await fetch(url);
+  const data = await response.json();
+
+  const formatedData = formatData(data, days);
+  return [{id: "windDirection", data: formatedData}];
 }
 
 function formatData(data, days) {
@@ -77,4 +94,4 @@ function getAverageValue(days) {
   });
 }
 
-export { getStations, getTemperatureData, getPressureData };
+export { getStations, getTemperatureData, getPressureData, getWindVelocityData, getWindDirectionData };

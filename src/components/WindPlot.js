@@ -1,17 +1,19 @@
 import React, { Component } from "react";
 import { ResponsiveLine } from "@nivo/line";
+import DirectionTable from "./DirectionTable";
 
-class TemperaturePlot extends Component {
+class WindPlot extends Component {
   constructor(props) {
     super(props);
   }
   render() {
-    const { data } = this.props;
+    const { velocityData, directionData } = this.props;
+    console.log(velocityData);
     return (
       <div style={{ height: "50%", width: "50%" }}>
-        {data && (
+        {velocityData && (
           <ResponsiveLine
-            data={data}
+            data={velocityData}
             margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
             xScale={{ type: "point" }}
             yScale={{
@@ -34,7 +36,7 @@ class TemperaturePlot extends Component {
               tickSize: 5,
               tickPadding: 5,
               tickRotation: 0,
-              legend: "temperature",
+              legend: "velocity",
               legendOffset: -40,
               legendPosition: "middle",
             }}
@@ -50,9 +52,10 @@ class TemperaturePlot extends Component {
             enableSlices="x"
           />
         )}
+        {directionData && <DirectionTable data={directionData} />}
       </div>
     );
   }
 }
 
-export default TemperaturePlot;
+export default WindPlot;
