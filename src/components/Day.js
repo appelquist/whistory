@@ -9,8 +9,8 @@ class Day extends Component {
       const { data } = this.props;
     return (
       <div style={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
-        <h5>{data.temperature}</h5>
-        <h5>{data.velocity}</h5>
+        <h5 style={{width: "1rem"}}>{data.temperature}</h5>
+        <h5 style={{width: "1rem"}}>{data.velocity}</h5>
         <FontAwesomeIcon
           icon="arrow-up"
           transform={{ rotate: 180 + data.direction }}
