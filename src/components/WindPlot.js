@@ -1,16 +1,15 @@
 import React, { Component } from "react";
 import { ResponsiveLine } from "@nivo/line";
-import DirectionTable from "./DirectionTable";
 
 class WindPlot extends Component {
   constructor(props) {
     super(props);
   }
+
   render() {
-    const { velocityData, directionData } = this.props;
-    console.log(velocityData);
+    const { velocityData } = this.props;
     return (
-      <div style={{ height: "50%", width: "50%" }}>
+      <div style={{ height: "25%", width: "50%", display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column"}}>
         {velocityData && (
           <ResponsiveLine
             data={velocityData}
@@ -50,9 +49,9 @@ class WindPlot extends Component {
             useMesh={true}
             enableCrosshair={false}
             enableSlices="x"
-          />
+          >
+          </ResponsiveLine>
         )}
-        {directionData && <DirectionTable data={directionData} />}
       </div>
     );
   }

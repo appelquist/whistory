@@ -1,21 +1,43 @@
-import React, { Component } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React, { Component } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class DirectionTable extends Component {
-    constructor(props) {
-        super(props);
-    }
+  constructor(props) {
+    super(props);
+  }
 
-    render() {
-        const { data } = this.props;
-        const directionData = data[0].data;
-        return (
-            <div>
-                {/* {directionata.map(direction => (<FontAwesomeIcon icon="fa-arrow-up" rotation={180 + direction.y} />))} */}
-                {directionData.map(direction => (<FontAwesomeIcon icon="arrow-up" transform={{ rotate: 180 + direction.y}} />))}
-            </div>
-        )
-    }
+  static defaultProps = {
+      directionData: [{
+          id: "",
+          data: []
+      }],
+  }
+
+  render() {
+    const { directionData } = this.props;
+    const data = directionData[0].data;
+    return (
+      <div
+        className="DirectionTable"
+        style={{
+          width: "50%",
+          height: "25%",
+          display: "flex",
+          justifyContent: "space-between",
+        }}
+      >
+        {data.map((direction) => (
+          <div>
+            <FontAwesomeIcon
+              icon="arrow-up"
+              transform={{ rotate: 180 + direction.y }}
+            />{" "}
+            <h5>{direction.x}</h5>
+          </div>
+        ))}
+      </div>
+    );
+  }
 }
 
 export default DirectionTable;

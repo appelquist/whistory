@@ -8,7 +8,7 @@ class TemperaturePlot extends Component {
   render() {
     const { data } = this.props;
     return (
-      <div style={{ height: "50%", width: "50%" }}>
+      <div style={{ height: "25%", width: "50%" }}>
         {data && (
           <ResponsiveLine
             data={data}
