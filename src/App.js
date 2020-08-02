@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { library, noAuto } from "@fortawesome/fontawesome-svg-core";
-import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faArrowUp, faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
 import {
   getTemperatureData,
   getPressureData,
@@ -15,29 +15,34 @@ import WindPlot from "./components/WindPlot";
 import DirectionTable from "./components/DirectionTable";
 import DayList from "./components/DayList";
 
-library.add(faArrowUp);
+library.add(faArrowUp, faCaretDown, faCaretUp);
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       data: false,
+      days: 6,
     };
     this.getData = this.getData.bind(this);
+    this.changeDays = this.changeDays.bind(this);
   }
 
   async getData(station) {
-    const temperatureData = await getTemperatureData(station, 7);
-    const pressureData = await getPressureData(station, 7);
-    const windVelocityData = await getWindVelocityData(station, 7);
-    const windDirectionData = await getWindDirectionData(station, 7);
     this.setState({
       data: {
-        temperature: temperatureData,
-        pressure: pressureData,
-        velocity: windVelocityData,
-        direction: windDirectionData,
+        temperature: await getTemperatureData(station, this.state.days),
+        pressure: await getPressureData(station, this.state.days),
+        velocity: await getWindVelocityData(station, this.state.days),
+        direction:  await getWindDirectionData(station, this.state.days),
       },
+      station: station,
+    });
+  }
+
+  async changeDays(days) {
+    this.setState({
+      days: days,
     });
   }
 
@@ -52,7 +57,7 @@ class App extends Component {
           <PressurePlot data={pressure} />
           <WindPlot velocityData={velocity}  />
           <DirectionTable directionData={direction} /> */}
-          <DayList data={{...this.state.data}} />
+          <DayList data={{...this.state.data}} getData={this.getData} changeDays={this.changeDays} station={this.state.station} days={this.state.days} />
         </div>
       </div>
     );

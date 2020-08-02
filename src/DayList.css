@@ -1,0 +1,43 @@
+.DaysList {
+  width: 66%;
+  max-width: 1000px;
+  margin: 1em auto;
+  padding: 1em;
+  text-align: center
+}
+
+.DaysList-table {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 0 1.5em 0;
+  padding: 0;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.2);
+}
+
+.DaysList-header {
+    background: #1B1B1E;
+    color: white;
+}
+
+.DaysList-table .DaysList-row {
+  width: 100%;
+  display: flex;
+}
+
+.DaysList-table .DaysList-row .DaysList-cell {
+  box-sizing: border-box;
+  flex-grow: 1;
+  padding: 0.8em 1.2em;
+  overflow: hidden;
+  list-style: none;
+}
+
+.Day {
+    background: #EEF0F2;
+    color: #1B1B1E;
+}
+
+.DaysList-cell {
+    width: 20%;
+    text-align: center;
+}

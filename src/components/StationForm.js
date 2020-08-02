@@ -14,7 +14,8 @@ class StationForm extends Component {
     handleSubmit(e) {
         e.preventDefault();
         const station = STATIONS_SEARCH_DATA.find(station => station.searchName.toLowerCase() === this.state.stationName.toLowerCase());
-        this.props.getData(station);
+        const days = 6;
+        this.props.getData(station, days);
     }
 
     handleChange(e) {
