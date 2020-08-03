@@ -32,12 +32,39 @@
   list-style: none;
 }
 
+.Daylist-column-heading-datum {
+    margin-right: 1rem;
+}
+
 .Day {
     background: #EEF0F2;
     color: #1B1B1E;
+    transition: 200ms ease-in-out;
+}
+
+.Day:hover {
+    border-left: 1px solid #1B1B1E;
 }
 
 .DaysList-cell {
     width: 20%;
     text-align: center;
+}
+
+.hoursButton-enter {
+    opacity: 0.01;
+}
+
+.hoursButton-enter .hoursButton-enter-active {
+    opacity: 1;
+    transition: opacity 200ms ease-in;
+}
+
+.hoursButton-exit {
+    opacity: 1;
+}
+
+.hoursButton-exit-active {
+    opacity: 0.01;
+    transition: opacity 200ms ease-in;
 }

@@ -48,10 +48,10 @@ class DayList extends Component {
             <div className="DaysList-cell header-cell Daylist-column-heading">Vindhastighet</div>
             <div className="DaysList-cell header-cell Daylist-column-heading">Vindriktning</div>
             <div className="DaysList-cell header-cell Daylist-column-heading">Lufttryck</div>
-            <div className="DaysList-cell header-cell Daylist-column-heading">Datum</div>
+            <div className="DaysList-cell header-cell Daylist-column-heading Daylist-column-heading-datum">Datum</div>
           </div>
-          {daysData.map((day) => (
-            <Day data={day} />
+          {daysData.map((day, i) => (
+            <Day data={day} key={i} station={this.props.station} />
           ))}
         </div>
         <div>

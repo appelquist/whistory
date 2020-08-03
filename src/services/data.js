@@ -7,6 +7,41 @@ async function getStations() {
   return stations;
 }
 
+async function getHoursData(station) {
+  const temperatureUrl = `https://opendata-download-metobs.smhi.se/api/version/latest/parameter/1/station/${station.key}/period/latest-months/data.json`;
+  const pressureUrl = `https://opendata-download-metobs.smhi.se/api/version/latest/parameter/9/station/${station.key}/period/latest-months/data.json`;
+  const velocityUrl = `https://opendata-download-metobs.smhi.se/api/version/latest/parameter/4/station/${station.key}/period/latest-months/data.json`;
+  const directionUrl = `https://opendata-download-metobs.smhi.se/api/version/latest/parameter/3/station/${station.key}/period/latest-months/data.json`;
+
+  const temperatureResponse = await fetch(temperatureUrl);
+  const pressureResponse = await fetch(pressureUrl);
+  const velocityResponse = await fetch(velocityUrl);
+  const directionResponse = await fetch(directionUrl);
+
+  const temperatureData = await temperatureResponse.json();
+  const pressureData = await pressureResponse.json();
+  const velocityData = await velocityResponse.json();
+  const directionData = await directionResponse.json();
+
+  console.log(formatToHoursData(temperatureData));
+  console.log(pressureData);
+  console.log(velocityData);
+  console.log(directionData);
+}
+
+function formatToHoursData(data) {
+  const today = new Date();
+  const formatedData = data.value
+    .map((val) => ({ ...val, date: new Date(val.date) }))
+    .filter(
+      (val) =>
+        val.date.getDate() === today.getDate() &&
+        val.date.getMonth() === today.getMonth()
+    );
+
+    return formatedData;
+}
+
 async function getTemperatureData(station, days) {
   const url = `https://opendata-download-metobs.smhi.se/api/version/latest/parameter/1/station/${station.key}/period/latest-months/data.json`;
   const response = await fetch(url);
@@ -31,7 +66,7 @@ async function getWindVelocityData(station, days) {
   const data = await response.json();
 
   const formatedData = formatData(data, days);
-  return [{id: "windVelocity", data: formatedData}];
+  return [{ id: "windVelocity", data: formatedData }];
 }
 
 async function getWindDirectionData(station, days) {
@@ -40,7 +75,7 @@ async function getWindDirectionData(station, days) {
   const data = await response.json();
 
   const formatedData = formatData(data, days);
-  return [{id: "windDirection", data: formatedData}];
+  return [{ id: "windDirection", data: formatedData }];
 }
 
 function formatData(data, days) {
@@ -94,4 +129,11 @@ function getAverageValue(days) {
   });
 }
 
-export { getStations, getTemperatureData, getPressureData, getWindVelocityData, getWindDirectionData };
+export {
+  getStations,
+  getTemperatureData,
+  getPressureData,
+  getWindVelocityData,
+  getWindDirectionData,
+  getHoursData,
+};
