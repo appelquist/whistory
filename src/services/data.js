@@ -23,10 +23,22 @@ async function getHoursData(station) {
   const velocityData = await velocityResponse.json();
   const directionData = await directionResponse.json();
 
-  console.log(formatToHoursData(temperatureData));
-  console.log(pressureData);
-  console.log(velocityData);
-  console.log(directionData);
+  const temperature = formatToHoursData(temperatureData);
+  const pressure = formatToHoursData(pressureData);
+  const velocity = formatToHoursData(velocityData);
+  const direction = formatToHoursData(directionData);
+
+  console.log(pressure);
+
+  console.log(temperature.map((val, i) => {
+    return {
+      date: val.date,
+      temperature: val.value,
+      pressure: pressure[i].value,
+      velocity: velocity[i].value,
+      direction: direction[i].value
+    }
+  }));
 }
 
 function formatToHoursData(data) {

@@ -21,6 +21,7 @@ class Day extends Component {
     });
   }
 
+  //TODO: getHoursData ska ta in datum och returnera timmarna med värden för de datumet.
   handleClick() {
     this.setState({
       showHours: true,
@@ -58,6 +59,9 @@ class Day extends Component {
             <FontAwesomeIcon icon="caret-down" size="lg" />
           </div>
         </CSSTransition>
+        <div> 
+        {/* TODO: Här ska alla timmar finnas för denna dag om showHours är true */}
+        </div>
         </div>
       </div>
     );
