@@ -20,26 +20,12 @@ class DayList extends Component {
     this.props.getData(this.props.station);
   }
 
+  showHours(key) {
+
+  }
+
   render() {
-    const { temperature, pressure, velocity, direction } = this.props.data;
-    let daysData;
-    try {
-      daysData = temperature[0].data.map((temperature) => {
-        return {
-          temperature: temperature.y,
-          velocity: velocity[0].data.filter((val) => val.x === temperature.x)[0]
-            .y,
-          direction: direction[0].data.filter(
-            (val) => val.x === temperature.x
-          )[0].y,
-          pressure: pressure[0].data.filter((val) => val.x === temperature.x)[0]
-            .y,
-          date: temperature.x,
-        };
-      });
-    } catch (e) {
-      daysData = [];
-    }
+    const { data } = this.props;
     return (
       <div className="DaysList">
         <div className="DaysList-table">
@@ -50,8 +36,8 @@ class DayList extends Component {
             <div className="DaysList-cell header-cell Daylist-column-heading">Lufttryck</div>
             <div className="DaysList-cell header-cell Daylist-column-heading Daylist-column-heading-datum">Datum</div>
           </div>
-          {daysData.map((day, i) => (
-            <Day data={day} key={i} station={this.props.station} />
+          {data && data.map((day, i) => (
+            <Day data={day} key={i} />
           ))}
         </div>
         <div>

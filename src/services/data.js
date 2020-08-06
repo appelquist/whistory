@@ -7,7 +7,7 @@ async function getStations() {
   return stations;
 }
 
-async function getHoursData(station) {
+async function getWeatherData(station, days) {
   const temperatureUrl = `https://opendata-download-metobs.smhi.se/api/version/latest/parameter/1/station/${station.key}/period/latest-months/data.json`;
   const pressureUrl = `https://opendata-download-metobs.smhi.se/api/version/latest/parameter/9/station/${station.key}/period/latest-months/data.json`;
   const velocityUrl = `https://opendata-download-metobs.smhi.se/api/version/latest/parameter/4/station/${station.key}/period/latest-months/data.json`;
@@ -23,82 +23,39 @@ async function getHoursData(station) {
   const velocityData = await velocityResponse.json();
   const directionData = await directionResponse.json();
 
-  const temperature = formatToHoursData(temperatureData);
-  const pressure = formatToHoursData(pressureData);
-  const velocity = formatToHoursData(velocityData);
-  const direction = formatToHoursData(directionData);
+  const temperature = getAveragesPerDayAndGroup(temperatureData, days);
+  const pressure = getAveragesPerDayAndGroup(pressureData, days);
+  const velocity = getAveragesPerDayAndGroup(velocityData, days);
+  const direction = getAveragesPerDayAndGroup(directionData, days);
 
-  console.log(pressure);
-
-  console.log(temperature.map((val, i) => {
-    return {
-      date: val.date,
-      temperature: val.value,
-      pressure: pressure[i].value,
-      velocity: velocity[i].value,
-      direction: direction[i].value
-    }
+  return temperature.map((val, i) => ({
+    date: val.date,
+    temperature: val.value,
+    pressure: pressure[i].value,
+    velocity: velocity[i].value,
+    direction: direction[i].value,
+    hours: getHoursData(val, pressure[i], velocity[i], direction[i]),
   }));
 }
 
-function formatToHoursData(data) {
-  const today = new Date();
-  const formatedData = data.value
-    .map((val) => ({ ...val, date: new Date(val.date) }))
-    .filter(
-      (val) =>
-        val.date.getDate() === today.getDate() &&
-        val.date.getMonth() === today.getMonth()
-    );
-
-    return formatedData;
+function getHoursData(temperature, pressure, velocity, direction) {
+  return temperature.hours.map((val, i) => ({
+    hour: val.time,
+    temperature: val.value,
+    pressure: pressure.hours[i].value,
+    velocity: velocity.hours[i].value,
+    direction: direction.hours[i].value,
+  }));
 }
 
-async function getTemperatureData(station, days) {
-  const url = `https://opendata-download-metobs.smhi.se/api/version/latest/parameter/1/station/${station.key}/period/latest-months/data.json`;
-  const response = await fetch(url);
-  const data = await response.json();
-
-  const formatedData = formatData(data, days);
-  return [{ id: "temperature", data: formatedData }];
-}
-
-async function getPressureData(station, days) {
-  const url = `https://opendata-download-metobs.smhi.se/api/version/latest/parameter/9/station/${station.key}/period/latest-months/data.json`;
-  const response = await fetch(url);
-  const data = await response.json();
-
-  const formatedData = formatData(data, days);
-  return [{ id: "pressure", data: formatedData }];
-}
-
-async function getWindVelocityData(station, days) {
-  const url = `https://opendata-download-metobs.smhi.se/api/version/latest/parameter/4/station/${station.key}/period/latest-months/data.json`;
-  const response = await fetch(url);
-  const data = await response.json();
-
-  const formatedData = formatData(data, days);
-  return [{ id: "windVelocity", data: formatedData }];
-}
-
-async function getWindDirectionData(station, days) {
-  const url = `https://opendata-download-metobs.smhi.se/api/version/latest/parameter/3/station/${station.key}/period/latest-months/data.json`;
-  const response = await fetch(url);
-  const data = await response.json();
-
-  const formatedData = formatData(data, days);
-  return [{ id: "windDirection", data: formatedData }];
-}
-
-function formatData(data, days) {
+function getAveragesPerDayAndGroup(data, days) {
   const values = data.value;
   const timesAndValues = values.map((value) => {
     const date = new Date(value.date);
     return { time: date, value: value.value };
   });
-
   const latestTimesAndValues = getLatestTimesAndValues(days, timesAndValues);
-  const valuesByDay = groupBy(latestTimesAndValues, "day");
+  const valuesByDay = groupBy(latestTimesAndValues, "date");
   const averagesByDay = getAverageValue(Object.values(valuesByDay));
   return averagesByDay;
 }
@@ -114,7 +71,7 @@ function getLatestTimesAndValues(days, timesAndValues) {
     .map((val) => {
       let day = new Date(val.time);
       day.setHours(0);
-      return { ...val, day: day };
+      return { ...val, date: day };
     });
 }
 
@@ -135,17 +92,10 @@ function getAverageValue(days) {
       return parseFloat(acc) + parseFloat(curr.value);
     }, 0);
     let average = (sum / day.length).toFixed(1);
-    let singleDay = day[0].time;
-    singleDay = `${singleDay.getDate()}/${singleDay.getMonth() + 1}`;
-    return { x: singleDay, y: Number(average) };
+    let singleDay = new Date(day[0].time);
+    singleDay.setHours(0);
+    return { date: singleDay, value: Number(average), hours: day };
   });
 }
 
-export {
-  getStations,
-  getTemperatureData,
-  getPressureData,
-  getWindVelocityData,
-  getWindDirectionData,
-  getHoursData,
-};
+export { getStations, getWeatherData };

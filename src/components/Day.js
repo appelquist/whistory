@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { CSSTransition } from "react-transition-group";
-import { getHoursData } from '../services/data'
+import Hour from "./Hour";
 
 class Day extends Component {
   constructor(props) {
@@ -21,49 +21,58 @@ class Day extends Component {
     });
   }
 
-  //TODO: getHoursData ska ta in datum och returnera timmarna med värden för de datumet.
   handleClick() {
     this.setState({
-      showHours: true,
-      hoursData: getHoursData(this.props.station),
+      showHours: !this.state.showHours,
     });
   }
 
   render() {
     const { data } = this.props;
-    const { isHovering } = this.state;
+    const { isHovering, showHours } = this.state;
     return (
-      <div
-        className="Day DaysList-row"
-        onMouseEnter={this.handleMouseHover}
-        onMouseLeave={this.handleMouseHover}
-      >
-        <div className="DaysList-cell">{data.temperature}</div>
-        <div className="DaysList-cell">{data.velocity}</div>
-        <div className="DaysList-cell">
-          <FontAwesomeIcon
-            icon="arrow-up"
-            transform={{ rotate: 180 + data.direction }}
-          />
-        </div>
-        <div className="DaysList-cell">{data.pressure}</div>
-        <div className="DaysList-cell">{data.date}</div>
-        <div style={{width: "1rem"}}>
-        <CSSTransition
-          in={isHovering}
-          timeout={200}
-          classNames="hoursButton"
-          unmountOnExit
+      <>
+        <div
+          className="Day DaysList-row"
+          onMouseEnter={this.handleMouseHover}
+          onMouseLeave={this.handleMouseHover}
         >
-          <div  onClick={this.handleClick} style={{paddingTop: "0.5rem", cursor: "pointer" }}>
-            <FontAwesomeIcon icon="caret-down" size="lg" />
+          <div className="DaysList-cell">{data.temperature}</div>
+          <div className="DaysList-cell">{data.velocity}</div>
+          <div className="DaysList-cell">
+            <FontAwesomeIcon
+              icon="arrow-up"
+              transform={{ rotate: 180 + data.direction }}
+            />
           </div>
-        </CSSTransition>
-        <div> 
-        {/* TODO: Här ska alla timmar finnas för denna dag om showHours är true */}
+          <div className="DaysList-cell">{data.pressure}</div>
+          <div className="DaysList-cell">{`${data.date.getDate()}/${
+            data.date.getMonth() + 1
+          }`}</div>
+          <CSSTransition
+            in={isHovering}
+            timeout={200}
+            classNames="hoursButton"
+            unmountOnExit
+          >
+            <div
+              onClick={this.handleClick}
+              style={{ paddingTop: "0.5rem", cursor: "pointer" }}
+            >
+              <FontAwesomeIcon icon="caret-down" size="lg" />
+            </div>
+          </CSSTransition>
         </div>
-        </div>
-      </div>
+        {showHours && (
+          <div className="Hour DaysList-row">
+            <div className="DaysList-table">
+              {data.hours.map((hour, i) => (
+                <Hour data={hour} key={i} />
+              ))}
+            </div>
+          </div>
+        )}
+      </>
     );
   }
 }
