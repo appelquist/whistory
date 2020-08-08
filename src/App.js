@@ -13,6 +13,7 @@ import StationForm from "./components/StationForm";
 // import WindPlot from "./components/WindPlot";
 // import DirectionTable from "./components/DirectionTable";
 import DayList from "./components/DayList";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 library.add(faArrowUp, faCaretDown, faCaretUp);
 
@@ -25,6 +26,8 @@ class App extends Component {
     };
     this.getData = this.getData.bind(this);
     this.changeDays = this.changeDays.bind(this);
+    this.addDays = this.addDays.bind(this);
+    this.removeDays = this.removeDays.bind(this);
   }
 
   async getData(station) {
@@ -38,6 +41,16 @@ class App extends Component {
     this.setState({
       days: days,
     });
+  }
+
+  async addDays() {
+    await this.changeDays(this.state.days + 7);
+    this.getData(this.state.station);
+  }
+
+  async removeDays() {
+    await this.changeDays(this.state.days - 7);
+    this.getData(this.state.station);
   }
 
   async componentDidMount() {}
@@ -63,6 +76,10 @@ class App extends Component {
             station={this.state.station}
             days={this.state.days}
           />
+          <div>
+        {this.state.days > 6  && <button onClick={this.removeDays} style={{border: "none", outline: "none", background: "#EEF0F2", cursor: "pointer"}}><FontAwesomeIcon icon="caret-up" size="3x"/></button>}
+        <button  onClick={this.addDays} style={{border: "none", outline: "none", background: "#EEF0F2", cursor: "pointer"}}><FontAwesomeIcon icon="caret-down" size="3x"/></button>
+        </div>
         </div>
       </div>
     );

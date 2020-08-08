@@ -3,7 +3,9 @@
   max-width: 1000px;
   margin: 1em auto;
   padding: 1em;
-  text-align: center
+  text-align: center;
+  max-height: 50vh;
+  overflow: scroll;
 }
 
 .DaysList-table {

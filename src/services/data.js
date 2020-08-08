@@ -26,8 +26,8 @@ async function getWeatherData(station, days) {
   const temperature = getAveragesPerDayAndGroup(temperatureData, days);
   const pressure = getAveragesPerDayAndGroup(pressureData, days);
   const velocity = getAveragesPerDayAndGroup(velocityData, days);
-  const direction = getAveragesPerDayAndGroup(directionData, days);
-
+  const direction = getAverageWindDirectionAndGroup(directionData, velocityData, days);
+  
   return temperature.map((val, i) => ({
     date: val.date,
     temperature: val.value,
@@ -35,7 +35,7 @@ async function getWeatherData(station, days) {
     velocity: velocity[i].value,
     direction: direction[i].value,
     hours: getHoursData(val, pressure[i], velocity[i], direction[i]),
-  }));
+  })).reverse();
 }
 
 function getHoursData(temperature, pressure, velocity, direction) {
@@ -45,7 +45,7 @@ function getHoursData(temperature, pressure, velocity, direction) {
     pressure: pressure.hours[i].value,
     velocity: velocity.hours[i].value,
     direction: direction.hours[i].value,
-  }));
+  })).reverse();
 }
 
 function getAveragesPerDayAndGroup(data, days) {
@@ -96,6 +96,40 @@ function getAverageValue(days) {
     singleDay.setHours(0);
     return { date: singleDay, value: Number(average), hours: day };
   });
+}
+
+//TODO: validate this function!
+function getAverageWindDirectionAndGroup(direction, velocity, days) {
+const directionValues = direction.value;
+const velocityValues = velocity.value;
+
+const directionTimesAndValues = directionValues.map((value) => {
+  const date = new Date(value.date);
+  return { time: date, value: value.value };
+});
+const latestDirectionTimesAndValues = getLatestTimesAndValues(days, directionTimesAndValues);
+const directionValuesByDay = groupBy(latestDirectionTimesAndValues, "date");
+
+const averageDirection = Object.values(directionValuesByDay).map((val, i) => {
+  let directionSum = val.reduce((acc, curr) => {
+    return parseFloat(acc) + parseFloat(curr.value);
+  }, 0);
+  let velocitySum = val.reduce((acc, curr) => {
+    return parseFloat(acc) + parseFloat(curr.value);
+  }, 0);
+
+  let vectorEast = ((velocitySum * Math.sin(directionSum * (Math.PI/180)))/val.length).toFixed(1);
+  let vectorNorth = ((velocitySum * Math.cos(directionSum * (Math.PI/180)))/val.length).toFixed(1);
+
+  let meanWindDirection = Math.atan2(vectorEast, vectorNorth) * (180/Math.PI);
+  meanWindDirection = (360 + meanWindDirection) %  360;
+
+  let singleDay = new Date(val[0].time);
+  singleDay.setHours(0);
+  
+  return { date: singleDay, value: Number(meanWindDirection).toFixed(1), hours: val };
+})
+return averageDirection;
 }
 
 export { getStations, getWeatherData };

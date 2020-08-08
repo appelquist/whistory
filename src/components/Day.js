@@ -30,6 +30,12 @@ class Day extends Component {
   render() {
     const { data } = this.props;
     const { isHovering, showHours } = this.state;
+    let direction = 0;
+    if((Number(data.direction) + 180) > 359) {
+      direction = Number(data.direction) - 180;
+    } else {
+      direction = Number(data.direction) + 180;
+    }
     return (
       <>
         <div
@@ -42,7 +48,7 @@ class Day extends Component {
           <div className="DaysList-cell">
             <FontAwesomeIcon
               icon="arrow-up"
-              transform={{ rotate: 180 + data.direction }}
+              transform={{ rotate: direction }}
             />
           </div>
           <div className="DaysList-cell">{data.pressure}</div>

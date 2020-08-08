@@ -40,10 +40,10 @@ class DayList extends Component {
             <Day data={day} key={i} />
           ))}
         </div>
-        <div>
+        {/* <div>
         {this.props.days > 6  && <button onClick={this.removeDays} style={{border: "none", outline: "none", background: "#EEF0F2", cursor: "pointer"}}><FontAwesomeIcon icon="caret-up" size="3x"/></button>}
         <button  onClick={this.addDays} style={{border: "none", outline: "none", background: "#EEF0F2", cursor: "pointer"}}><FontAwesomeIcon icon="caret-down" size="3x"/></button>
-        </div>
+        </div> */}
       </div>
     );
   }
