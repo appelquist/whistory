@@ -10,7 +10,6 @@ class Hour extends Component {
     } else {
       direction = Number(data.direction) + 180;
     }
-    console.log(direction);
     return (
       <div className="Hour DaysList-row">
         <div className="DaysList-cell">{data.temperature}</div>

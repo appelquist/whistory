@@ -1,0 +1,21 @@
+.Main-container {
+  width: 80%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 4rem auto;
+}
+
+.App {
+    font-family: 'Inconsolata', monospace;
+    height: 100vh;
+    width: 100%;
+}
+
+.changeDaysButton {
+    border: none;
+    outline: none;
+    background: #EEF0F2;
+    cursor: pointer;
+}

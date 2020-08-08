@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Day from "./Day.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "../DayList.css";
+import "../styles/DayList.css";
 
 class DayList extends Component {
   constructor(props) {
@@ -28,7 +28,7 @@ class DayList extends Component {
     const { data } = this.props;
     return (
       <div className="DaysList">
-        <div className="DaysList-table">
+        <div className="DaysList-table" id="scrollDaysList">
           <div className="DaysList-row DaysList-header">
             <div className="DaysList-cell header-cell Daylist-column-heading">Temperatur</div>
             <div className="DaysList-cell header-cell Daylist-column-heading">Vindhastighet</div>
@@ -40,10 +40,6 @@ class DayList extends Component {
             <Day data={day} key={i} />
           ))}
         </div>
-        {/* <div>
-        {this.props.days > 6  && <button onClick={this.removeDays} style={{border: "none", outline: "none", background: "#EEF0F2", cursor: "pointer"}}><FontAwesomeIcon icon="caret-up" size="3x"/></button>}
-        <button  onClick={this.addDays} style={{border: "none", outline: "none", background: "#EEF0F2", cursor: "pointer"}}><FontAwesomeIcon icon="caret-down" size="3x"/></button>
-        </div> */}
       </div>
     );
   }
