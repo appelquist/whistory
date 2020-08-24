@@ -8,11 +8,12 @@ async function getStations() {
 }
 
 async function getWeatherData(station, days) {
+  try{
   const temperatureUrl = `https://opendata-download-metobs.smhi.se/api/version/latest/parameter/1/station/${station.key}/period/latest-months/data.json`;
   const pressureUrl = `https://opendata-download-metobs.smhi.se/api/version/latest/parameter/9/station/${station.key}/period/latest-months/data.json`;
   const velocityUrl = `https://opendata-download-metobs.smhi.se/api/version/latest/parameter/4/station/${station.key}/period/latest-months/data.json`;
   const directionUrl = `https://opendata-download-metobs.smhi.se/api/version/latest/parameter/3/station/${station.key}/period/latest-months/data.json`;
-
+  
   const temperatureResponse = await fetch(temperatureUrl);
   const pressureResponse = await fetch(pressureUrl);
   const velocityResponse = await fetch(velocityUrl);
@@ -27,7 +28,7 @@ async function getWeatherData(station, days) {
   const pressure = getAveragesPerDayAndGroup(pressureData, days);
   const velocity = getAveragesPerDayAndGroup(velocityData, days);
   const direction = getAverageWindDirectionAndGroup(directionData, velocityData, days);
-  
+  console.log(direction);
   return temperature.map((val, i) => ({
     date: val.date,
     temperature: val.value,
@@ -36,6 +37,9 @@ async function getWeatherData(station, days) {
     direction: direction[i].value,
     hours: getHoursData(val, pressure[i], velocity[i], direction[i]),
   })).reverse();
+} catch(error) {
+  console.log(error);
+}
 }
 
 function getHoursData(temperature, pressure, velocity, direction) {
@@ -44,7 +48,7 @@ function getHoursData(temperature, pressure, velocity, direction) {
     temperature: val.value,
     pressure: pressure.hours[i].value,
     velocity: velocity.hours[i].value,
-    direction: direction.hours[i].value,
+    direction: direction.hours[i].direction,
   })).reverse();
 }
 
@@ -98,24 +102,29 @@ function getAverageValue(days) {
   });
 }
 
-//TODO: validate this function!
+//TODO: VALIDATE THIS FUNCTION
 function getAverageWindDirectionAndGroup(direction, velocity, days) {
-const directionValues = direction.value;
-const velocityValues = velocity.value;
+const directionValues = direction.value.map(val => ({time: new Date(val.date), value: val.value}));
+const latestDirectionValues = getLatestTimesAndValues(days, directionValues);
+const directionValuesByDay = groupBy(latestDirectionValues, "date");
 
-const directionTimesAndValues = directionValues.map((value) => {
-  const date = new Date(value.date);
-  return { time: date, value: value.value };
+const velocityValues = velocity.value.map(val => ({time: new Date(val.date), value: val.value}));
+const latestVelocityValues = getLatestTimesAndValues(days, velocityValues);
+const velocityValuesByDay = groupBy(latestVelocityValues, "date");
+
+const velocityAndDirectionValues = Object.values(directionValuesByDay).map((day, i)  => {
+  return day.map((hour, j) => {
+    return {time: hour.time, direction: hour.value, velocity: Object.values(velocityValuesByDay)[i][j].value}
+  })
 });
-const latestDirectionTimesAndValues = getLatestTimesAndValues(days, directionTimesAndValues);
-const directionValuesByDay = groupBy(latestDirectionTimesAndValues, "date");
 
-const averageDirection = Object.values(directionValuesByDay).map((val, i) => {
+
+const averageDirection = velocityAndDirectionValues.map((val, i) => {
   let directionSum = val.reduce((acc, curr) => {
-    return parseFloat(acc) + parseFloat(curr.value);
+    return parseFloat(acc) + parseFloat(curr.direction);
   }, 0);
   let velocitySum = val.reduce((acc, curr) => {
-    return parseFloat(acc) + parseFloat(curr.value);
+    return parseFloat(acc) + parseFloat(curr.velocity);
   }, 0);
 
   let vectorEast = ((velocitySum * Math.sin(directionSum * (Math.PI/180)))/val.length).toFixed(1);
@@ -128,7 +137,9 @@ const averageDirection = Object.values(directionValuesByDay).map((val, i) => {
   singleDay.setHours(0);
   
   return { date: singleDay, value: Number(meanWindDirection).toFixed(1), hours: val };
-})
+});
+
+
 return averageDirection;
 }
 

@@ -48,7 +48,7 @@ class Day extends Component {
           <div className="DaysList-cell">
             <FontAwesomeIcon
               icon="arrow-up"
-              transform={{ rotate: direction }}
+              transform={{ rotate: data.direction }}
             />
           </div>
           <div className="DaysList-cell">{data.pressure}</div>
